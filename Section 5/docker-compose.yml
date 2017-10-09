@@ -1,0 +1,25 @@
+version: '2'
+
+services:
+  packtwebapp:
+    image: packtwebapp
+    build:
+      context: ./packt_webapp
+      dockerfile: Dockerfile
+    ports: 
+      - "8000:80"
+    depends_on:
+      - db
+    environment:
+      DATABASE_IP: "192.168.188.26"
+      DATABASE_NAME: "PacktDatabase"
+      DATABASE_USER: "sa"
+      DATABASE_PASSWORD: "testTest123"
+
+  db:
+    image: "microsoft/mssql-server-linux"
+    ports: 
+      - "1433:1433"
+    environment:
+      SA_PASSWORD: "testTest123"
+      ACCEPT_EULA: "Y"
